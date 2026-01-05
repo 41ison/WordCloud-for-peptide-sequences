@@ -7,3 +7,8 @@ You can customize the following:
 2. Adjust relative_scaling to control how much bigger frequent peptides appear.
 3. Modify the mask shape by changing the create_circular_mask function.
 4. For the enhanced version, you could use other properties like isoelectric point or molecular weight.
+
+This is how the plot will look like
+<p align = "center">
+<img src = "https://github.com/41ison/WordCloud-for-peptide-sequences/blob/main/peptide_wordcloud.png" width = "1000">
+</p>
