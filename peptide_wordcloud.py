@@ -3,10 +3,9 @@ import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 import numpy as np
 from matplotlib.colors import LinearSegmentedColormap
-import seaborn as sns
-from PIL import Image
 
-peptide_counts = data_df_high_score["stripped_sequence"].value_counts()
+data_df_high_score = pd.read_csv("/Users/chaves/Documents/peptide.csv") # change this path to yours
+peptide_counts = data_df_high_score["stripped_sequence"].value_counts() # find the column with the peptide senquences. stripped_sequence in this example
 peptide_freq = dict(peptide_counts)
 colors = ["#d4e6f1", "#a9cce3", "#7fb3d5", "#5499c7", "#2980b9", "#1f618d", "#154360"]
 cmap = LinearSegmentedColormap.from_list("peptide_colors", colors, N=256)
@@ -41,13 +40,13 @@ wordcloud = WordCloud(
 ).generate_from_frequencies(peptide_freq)
 
 plt.figure(figsize=(12, 12))
-plt.imshow(wordcloud, interpolation="bilinear")
+plt.imshow(np.array(wordcloud.to_image()), interpolation="bilinear")
 plt.axis("off")
 plt.tight_layout(pad=0)
 
 plt.title(
     "Peptide sequence frequency view",
-    fontsize=24,
+    fontsize=35,
     pad=20,
     fontweight="bold",
     color="#2c3e50",
@@ -59,7 +58,7 @@ norm = plt.Normalize(min(peptide_freq.values()), max(peptide_freq.values()))
 sm = plt.cm.ScalarMappable(cmap=cmap, norm=norm)
 sm.set_array([])
 cbar = plt.colorbar(sm, cax=cax, orientation="horizontal")
-cbar.set_label("Peptide frequency", fontsize=10, color="#2c3e50")
+cbar.set_label("Peptide frequency", fontsize=25, color="#2c3e50")
 
 plt.savefig("peptide_wordcloud.png", dpi=300, bbox_inches="tight")
 plt.show()
